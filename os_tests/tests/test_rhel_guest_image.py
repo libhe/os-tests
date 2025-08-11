@@ -818,7 +818,7 @@ class TestGuestImage(unittest.TestCase):
         dest_path = '/tmp/' + data_file
         self.SSH.put_file(local_file=src_path, rmt_file=dest_path)
         cmd = "rpm -qa --qf '%{name}-%{version}-%{release}.%{arch} \
-(%{RSAHEADER:pgpsig})\n'|grep -v 'Key ID'" + "|grep -vFf %s" % dest_path
+(%{RSAHEADER})\n'|grep -v 'Key ID'" + "|grep -vFf %s" % dest_path
         output = utils_lib.run_cmd(self, cmd, msg="compare through grep")
 
         # cheshi, newline characters are not supported in aexpect, so need a
